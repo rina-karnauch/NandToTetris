@@ -1,0 +1,35 @@
+
+===============================================================================
+Rina Karnauch, rina.karnauch@mail.huji.ac.il
+===============================================================================
+
+                           Project 1 - Boolean Logics
+                           --------------------------
+  
+
+Submitted Files
+---------------
+README - This file.
+Not.hdl - logical not gate
+And.hdl - logical and gate
+Or.hdl - logical or gate
+Xor.hdl - logical xor gate
+Mux.hdl - multiplexor gate
+DMux.hdl - demultiplexor gate
+Not16.hdl - 16‫-‬bit Not gate
+And16.hdl - 16-bit And gate
+Or16.hdl - 16-bit Or gate
+Mux16.hdl - 16-bit DMux gate
+Or8Way - 8-bit Or gate
+Mux4Way16 - multiplexor of 4 bits out of 16 bits and 2 input selector bits
+Mux8Way16 - multiplexor of 8 bits out of 16 bits and 3 input selector bits
+DMux4Way - demultiplexor of 4 bits out of 2 bit and input
+DMux8Way - demultiplexor of 8 bits out of 3 bits and input
+
+
+Remarks
+-------
+* The Skelton for all chips is a Nand chip, used multiple times- therefore each time we use an
+  "Earlier" chip from the list, we actually use only Nands.
+* in the Mux16 We decided to not use Mux itself because than we would have 15 more hands in our 
+  Electrical circuit which always calculates the same value of !sel which is given to us.

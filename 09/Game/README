@@ -1,0 +1,35 @@
+===============================================================================
+Rina Karnauch, rina.karnauch@mail.huji.ac.il
+Eynam Wassertheil, eynam.wassertheil@mail.huji.ac.il
+===============================================================================
+
+                           Project 9 - eat-de-corona
+                           -------------------------
+
+
+Submitted Files
+---------------
+README - This file.
+- Main.program - main file 
+- Game.jack - main game object
+- Displayer.jack - displaying screens for with drawings of some things
+- Dog.jack - a dog player object class
+- Cat.jack - a cat player object class
+- Dragon.jack - a dragon player object class
+- Point.jack - a point to represent a pixel on screen class
+- Corona.jack - corona object to eat
+
+Remarks
+-------
+* You choose a player, and now you need to eat all the coronas out.
+* your choices are-
+- dragon
+- cat
+- dog
+AND NOW THE GAME BEGINS!
+------------------------
+* 15 coronas to eat -  are you read for the task?
+* from time to time speed is updated! Food was tasty now we faster, will you succeed to be inside the bounds? 
+GOOD LUCK!
+
+

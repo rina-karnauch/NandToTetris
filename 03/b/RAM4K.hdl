@@ -1,0 +1,39 @@
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/03/b/RAM4K.hdl
+
+/**
+ * Memory of 4K registers, each 16 bit-wide. Out holds the value
+ * stored at the memory location specified by address. If load==1, then 
+ * the in value is loaded into the memory location specified by address 
+ * (the loaded value will be emitted to out from the next time step onward).
+ */
+
+CHIP RAM4K {
+    IN in[16], load, address[12];
+    OUT out[16];
+
+    PARTS:
+    // adress is wwwzzzxxxyyy -> www says which on of the 8 (RAM512) we are picking.
+    // zzzxxxyyy is sent to all of them and handled inside of them.
+    DMux8Way(in=load, sel=address[9..11], a=toRAM0, b=toRAM1, c=toRAM2, d=toRAM3, e=toRAM4, f=toRAM5, g=toRAM6, h=toRAM7);
+
+    /*
+    * we take 8 RAM512 and use them recursivly.
+    * IN in[16], load, address[9];
+    * OUT out[16];
+    */ 
+    RAM512(in=in, load=toRAM0, address=address[0..8], out=ram0);
+    RAM512(in=in, load=toRAM1, address=address[0..8], out=ram1);
+    RAM512(in=in, load=toRAM2, address=address[0..8], out=ram2);
+    RAM512(in=in, load=toRAM3, address=address[0..8], out=ram3);
+    RAM512(in=in, load=toRAM4, address=address[0..8], out=ram4);
+    RAM512(in=in, load=toRAM5, address=address[0..8], out=ram5);
+    RAM512(in=in, load=toRAM6, address=address[0..8], out=ram6);
+    RAM512(in=in, load=toRAM7, address=address[0..8], out=ram7);
+
+    // and we output the wanted value
+    // we out it to the adress picked by  9..11
+    Mux8Way16(a=ram0, b=ram1, c=ram2, d=ram3, e=ram4, f=ram5, g=ram6, h=ram7, sel=address[9..11], out=out);
+}

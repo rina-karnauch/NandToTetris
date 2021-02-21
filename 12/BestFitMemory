@@ -1,0 +1,167 @@
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/12/Memory.jack
+
+/**
+ * This library provides two services: direct access to the computer's main
+ * memory (RAM), and allocation and recycling of memory blocks. The Hack RAM
+ * consists of 32,768 words, each holding a 16-bit binary number.
+ * best fit memory implementation
+ */
+class Memory {
+
+    static Array heap;
+    static Array ram;
+    static Array freeList;
+    static Array prev_block_for_fit;
+
+    /** Initializes the class. */
+    function void init() {
+        let ram = 0;
+
+        let heap = 2048;
+        let heap[0] = 14336;
+        let heap[1] = null;
+
+        let freeList = 2048;
+        let prev_block_for_fit = null;
+        return;
+    }
+
+    // size includes length and next. means size+2
+    // null is returned if no block found
+    function Array best_fit(int size){
+        var int current_size;
+        var int best_size;
+
+        var Array best_addr;
+        var Array current_addr;
+        var boolean loop_flag;
+
+        let best_addr = freeList;
+        let loop_flag = true;
+
+        while(loop_flag){
+            // if (~(best_addr_size<size)) -> best_addr<=size
+            if(~(best_addr[0]<size)){
+                let loop_flag = false;
+                // next we check
+                let current_addr = best_addr[1];
+                // will go outside loop afterwards
+            }
+            else{
+            // going to next
+                let prev_block_for_fit = best_addr;
+                let best_addr = best_addr[1];
+            }
+            if(best_addr = null){
+            // reached end and didn't find first block to fit.
+                return null;
+            }
+        }
+
+        while(~(current_best = null)){
+            let best_size = best_addr[0];
+            let current_size = current_addr[0];
+
+            if((current_size < best_size) & (~(current_size > size))){
+                let best_addr = current_addr;
+                let current_addr = current_addr[1];
+            }
+            else{
+                let prev_block_for_fit = current_addr;
+                let current_addr = current_addr[1];
+            }
+        }
+
+        return best_addr;
+    }
+
+    /** Returns the RAM value at the given address. */
+    function int peek(int address) {
+        return ram[address];
+    }
+
+    /** Sets the RAM value at the given address to the given value. */
+    function void poke(int address, int value) {
+        if (address > 24576){
+        // no writing to ROM.
+            return;
+        }
+        let ram[address] = value;
+        return;
+    }
+
+    /** Finds an available RAM block of the given size and returns
+     *  a reference to its base address. */
+    function int alloc(int size) {
+        var Array best_fit_block;
+        var Array concrete_block;
+        var Array next_block;
+
+        var int best_fit_size;
+
+
+        let best_fit_block = best_fit(size);
+        if (best_fit_block = null){
+        // no space found, need to de-frag or something
+        // not my job.
+            return null;
+        }
+
+        let best_fit_size = best_fit_block[0];
+
+        if(best_fit_size > size+1+2){
+            let prev_block_for_fit[1] = best_fit_block + 1 + size;
+            let next_block = prev_block_for_fit[1];
+            let next_block[0] = best_size - 1 - size;
+            let next_block[1] = best_fit_block[1];
+
+            let best_fit_block[0] = size+1;
+            let best_fit_block = best_fit_block + 1;
+        }
+        else{
+            // prev block will point at next block
+            let prev_block_for_fit[1] = best_fit_block[1];
+            // holding length at start
+            let best_fit_block[0] = best_fit_size + 1;
+            // start will be just after
+            let best_fit_block = best_fit_block + 1;
+        }
+        return best_fit_block;
+    }
+
+    /** De-allocates the given object (cast as an array) by making
+     *  it available for future allocations. */
+    function void deAlloc(Array o) {
+        var int length;
+        var Array last_block;
+
+        let o = o - 1; // including length
+        let length = o[0]; // length of object
+
+        let last_block = find_last_block();
+
+        let last_block[1] = o;
+        return;
+    }
+
+    function void find_last_block(){
+
+        var Array last_block;
+        var Array next_block;
+
+        let last_block = freeList;
+        let next_block = freeList[1];
+
+        while(~(next_block = null)){
+            let last_block = last_block[1];
+            let next_block = last_block[1];
+        }
+
+        return last_block;
+    }
+
+
+}

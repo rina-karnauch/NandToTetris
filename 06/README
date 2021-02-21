@@ -1,0 +1,47 @@
+===============================================================================
+Rina Karnauch, rina.karnauch@mail.huji.ac.il
+Eynam Wassertheil, eynam.wassertheil@mail.huji.ac.il
+===============================================================================
+
+                           Project 6 - Assembler
+                           ---------------------
+
+
+Submitted Files
+---------------
+README - This file.
+- Makefile - wrapper to give the users the ability to run the Assembler code.
+- Assembler - Assembler file to run the project.
+- Assembler.py - Assembler class and file containing the main method to run
+                 the transpiler from the Assembly language to the machine
+                 language.
+                 Later on also outputs the binary lines from the the
+                 assembly file/s into the
+                 hack file/s, with the same name of the assembly file.s but
+                 with an ".hack" ending.
+- Parser.py - Parsing object which is used in the Assembler class as a parsing
+              object, sections the lines into A,C,L command types and reads
+              them accordingly, storing them in an array of parsed binary lines
+              of the given file.
+- SymbolTable.py - table containing the predefined variables and their storage
+                    address.
+                    Later on we also add labels and variables from our assembly
+                    file to the table to reuse again in need.
+
+
+Remarks
+-------
+* Assembler is the one handling the option that the file name is a directory.
+  we figured that for each file we want a different parser instead of cleaning
+  up previous information each time.
+  That way we parse a file -> transpiler it -> output it -> run over the parser
+  with a new one containing the next file.
+  So we 1.don't use a lot of memory by not creating all new objects, and we
+  dont
+  need to spend time deleting the previous hidden information in the parse
+  object from the previous file.
+* Parser handles a single file- first cleans comments, then reads labels and
+  then reads A\C commands.
+* SymbolTable is a decorator class for a dictionary of items with given wanted
+  addresses with give to them. Decorating it allowed us to add more methods
+  inside for our convenience.

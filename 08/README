@@ -1,0 +1,34 @@
+===============================================================================
+Rina Karnauch, rina.karnauch@mail.huji.ac.il
+Eynam Wassertheil, eynam.wassertheil@mail.huji.ac.il
+===============================================================================
+
+                           Project 8 - Virtual Machine
+                           ---------------------------
+
+
+Submitted Files
+---------------
+README - This file.
+- Makefile - wrapper to give the users the ability to run the VM translator.
+- VMtranslator - VMtranslator file to run the project.
+- VMtranslator.py - VMtranslator class and file containing the main method to run
+                 the transpiler from the vm language to the asm language.
+                 Later on also outputs the asm lines from the the
+                 VM file/s into the
+                 ASM file/s, with the same name of the VMtranslator file.s but
+                 with an ".vm" ending.
+- Parser.py - Parsing object which is used in the VMtranslator class as a parsing
+              object, sections the lines and reads line by line, creating a block out of a line
+	      reading it with CodeWriter and then adding them all up as a block of code.
+- CodeWriter.py - translating a line of jack into asm block of lines.
+
+Remarks
+-------
+* we divided the project into 3 sections, drawing inspiration of project 6.
+1. VMtranslator: initializing information before translating, and calling the parser and translatlor fucntion(transpiler)
+2. Parser: parses all lines, line by line. Is line is sent to:
+3. CodeWriter: received a line and translated it, and sent back the asm block of lines.
+All the block lines sent back from CodeWriter are combined together as one block of lines printed into a file
+All those files are outputted into a file in VMtranslator, line by line.
+4. write_init is called last for our convenience.

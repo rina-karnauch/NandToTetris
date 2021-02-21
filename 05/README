@@ -1,0 +1,28 @@
+===============================================================================
+Rina Karnauch, rina.karnauch@mail.huji.ac.il
+===============================================================================
+
+                           Project 5 - Computer Architecture
+                           --------------------------------
+  
+
+Submitted Files
+---------------
+README - This file.
+- CPU.hdl - Central Processing unit containing registeres A,M,D, 
+  ALU and pc.
+- Memory.hdl - memory unit from keyboard, screen and RAM16K.
+- Computer.hdl - ROM32K with memory unit and CPU to represent the computer.
+- ExtendAlu.hdl - ALU with shift and multiplying commands.
+- CpuMul.hdl - CPU with multiplying and shifting commands.
+
+
+Remarks
+-------
+* CPUmul implemented like cpu but using the extended ALU we created.
+* Memory is created by 3 previous chips- screen, RAM16k, and screen, because
+  screen and keyboard are used as if they are an internal memory unit if
+  connected.
+* Computer is using ROM32K which is a given to us, and also Memory, CPU which 
+  we implemented by ourselves and represented the full nowadays computer
+  architecture. 

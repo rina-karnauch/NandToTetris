@@ -1,0 +1,156 @@
+// File name: projects/09/Game/Dog.jack
+
+/** class to represent a corona */
+class Corona{
+    field Array c; // array of point of corona
+
+    /** Constructs a new Corona object. */
+    constructor Corona new() {
+        let c = Array.new(63);
+        let c[0] = Point.new(5,3);
+        let c[1] = Point.new(8,3);
+        let c[2] = Point.new(3,4);
+        let c[3] = Point.new(6,4);
+        let c[4] = Point.new(7,4);
+        let c[5] = Point.new(8,4);
+        let c[6] = Point.new(9,4);
+        let c[7] = Point.new(12,4);
+        let c[8] = Point.new(5,5);
+        let c[9] = Point.new(6,5);
+        let c[10] = Point.new(7,5);
+        let c[11] = Point.new(8,5);
+        let c[12] = Point.new(9,5);
+        let c[13] = Point.new(10,5);
+        let c[14] = Point.new(11,5);
+        let c[15] = Point.new(5,6);
+        let c[16] = Point.new(6,6);
+        let c[17] = Point.new(7,6);
+        let c[18] = Point.new(8,6);
+        let c[19] = Point.new(9,6);
+        let c[20] = Point.new(10,6);
+        let c[21] = Point.new(11,6);
+        let c[22] = Point.new(13,6);
+        let c[23] = Point.new(4,7);
+        let c[24] = Point.new(5,7);
+        let c[25] = Point.new(6,7);
+        let c[26] = Point.new(7,7);
+        let c[27] = Point.new(8,7);
+        let c[28] = Point.new(9,7);
+        let c[29] = Point.new(10,7);
+        let c[30] = Point.new(11,7);
+        let c[31] = Point.new(4,8);
+        let c[32] = Point.new(5,8);
+        let c[33] = Point.new(6,8);
+        let c[34] = Point.new(7,8);
+        let c[35] = Point.new(8,8);
+        let c[36] = Point.new(9,8);
+        let c[37] = Point.new(10,8);
+        let c[38] = Point.new(11,8);
+        let c[39] = Point.new(12,8);
+        let c[40] = Point.new(2,9);
+        let c[41] = Point.new(5,9);
+        let c[42] = Point.new(6,9);
+        let c[43] = Point.new(7,9);
+        let c[44] = Point.new(8,9);
+        let c[45] = Point.new(9,9);
+        let c[46] = Point.new(10,9);
+        let c[47] = Point.new(4,10);
+        let c[48] = Point.new(5,10);
+        let c[49] = Point.new(6,10);
+        let c[50] = Point.new(7,10);
+        let c[51] = Point.new(8,10);
+        let c[52] = Point.new(9,10);
+        let c[53] = Point.new(10,10);
+        let c[54] = Point.new(7,11);
+        let c[55] = Point.new(8,11);
+        let c[56] = Point.new(9,11);
+        let c[57] = Point.new(12,11);
+        let c[58] = Point.new(4,12);
+        let c[59] = Point.new(10,12);
+        let c[60] = Point.new(6,13);
+        let c[61] = Point.new(7,13);
+        let c[62] = Point.new(9,13);
+        return this;
+    }
+
+    /**
+    method to display dog
+    */
+    method void displayCorona(){
+        var int i;
+        var Point current;
+
+        let i = 0;
+        while (i < 63){
+            let current = c[i];
+            do current.display();
+            let i = i + 1;
+        }
+        return;
+    }
+
+    /**
+    method to move Corona by xa and ya
+    */
+    method void moveCorona(Point newPlace){
+        var int i;
+        var Point current;
+
+        var int nx;
+        var int ny;
+
+        let nx = newPlace.getX();
+        let ny = newPlace.getY();
+
+        let i = 0;
+
+        do undrawCorona();
+        do Screen.setColor(true);
+
+        while (i < 63){
+            let current = c[i];
+            do current.move(nx,ny);
+            let c[i] = current;
+            let i = i + 1;
+        }
+        return;
+    }
+
+
+    /**
+    method to undraw corona
+    */
+    method void undrawCorona(){
+        do Screen.setColor(false);
+        do displayCorona();
+        return;
+    }
+
+    /**
+    method to delete corona
+    */
+    method void deleteCorona(){
+        var int i;
+        let i=0;
+        while(i<63){
+            do Memory.deAlloc(c[i]);
+            let i=i+1;
+        }
+        do Memory.deAlloc(c);
+        return;
+    }
+
+    /**
+    method to get corona indexes
+    */
+    method Array getPixels(){
+        return c;
+    }
+   
+    /**
+    method to get corona length
+    */
+    method int length(){
+        return 63;
+    }
+}

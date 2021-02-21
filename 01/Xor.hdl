@@ -1,0 +1,26 @@
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/01/Xor.hdl
+
+/**
+ * Exclusive-or gate:
+ * out = not (a == b)
+ */
+
+CHIP Xor {
+    IN a, b;
+    OUT out;
+
+    PARTS:
+    // first of all i draw a truth table and tried implementing by it and it took 7 nands
+    // therefore later i checked out each nand output and combined nands which werent necessery
+    // and came to this conclusion:
+    
+    Nand(a=a, b=b, out=aNandb);
+    Nand(a=a, b=aNandb, out=aNandaNandb);
+    Nand(a=aNandb, b=b, out=aNandbNandb);
+    Nand(a=aNandaNandb, b=aNandbNandb, out=out);
+
+    // implemented by 4 nands
+}

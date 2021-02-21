@@ -1,0 +1,41 @@
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/03/a/PC.hdl
+
+/**
+ * A 16-bit counter with load and reset control bits.
+ * if      (reset[t] == 1) out[t+1] = 0
+ * else if (load[t] == 1)  out[t+1] = in[t]
+ * else if (inc[t] == 1)   out[t+1] = out[t] + 1  (integer addition)
+ * else                    out[t+1] = out[t]
+ */
+
+CHIP PC {
+    IN in[16],load,inc,reset;
+    OUT out[16];
+
+    PARTS:
+    /* we calculate all the possiblities with a truth table:
+    * load | inc | reset | in | out[t+1] |
+    * ------------------------------------
+    *  0   |  0  |   0   | x |  out[t]   |
+    *  0   |  0  |   1   | x |     0     |
+    *  0   |  1  |   0   | x |  out[t]+1 |
+    *  0   |  1  |   1   | x |     0     |
+    *  1   |  0  |   0   | x |     x     |
+    *  1   |  0  |   1   | x |     0     |
+    *  1   |  1  |   0   | x |     x     |
+    *  1   |  1  |   1   | x |     0     |
+    * and we use mux8way16 instead of doing 3 mux16 because i got really
+    * logically confused trying to figure it out
+    */
+
+    // possible increased value
+    Inc16(in=value, out=increased);
+    // all posibilities
+    Mux8Way16(a=value, b=false, c=increased, d=false, e=in, f=false, g=in, h=false, sel[0]=reset, sel[1]=inc, sel[2]=load, out=output);
+    // registering the right possibility
+    Register(in=output, load=true, out=out, out=value);
+
+}

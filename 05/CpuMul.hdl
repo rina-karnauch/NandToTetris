@@ -1,0 +1,108 @@
+/**
+* This chip is an extension of the book CPU by using the extended ALU.
+* More specificly if instruction[15]==0 or (instruction[14] and instruction[13] equals 1)
+* the CpuMul behave exactly as the book CPU.
+* While if it is C instruction and instruction[13] == 0 the output will be D*A/M 
+* (according to instruction[12]).
+* Moreover, if it is c instruction and instruction[14] == 0 it will behave as follows:
+*
+* instruction:  | 12 | 11 | 10 |
+* _____________________________
+* shift left D  | 0  | 1  | 1  |
+* shift left A  | 0  | 1  | 0  |
+* shift left M  | 1  | 1  | 0  |
+* shift right D | 0  | 0  | 1  |
+* shift right A | 0  | 0  | 0  |
+* shift right M | 1  | 0  | 0  |
+**/
+
+CHIP CpuMul{
+
+    IN  inM[16],         // M value input  (M = contents of RAM[A])
+        instruction[16], // Instruction for execution
+        reset;           // Signals whether to re-start the current
+                         // program (reset=1) or continue executing
+                         // the current program (reset=0).
+
+    OUT outM[16],        // M value output
+        writeM,          // Write into M? 
+        addressM[15],    // Address in data memory (of M)
+        pc[15];          // address of next instruction
+
+     PARTS:
+      // ----------------------------------------- preperation ------------------------------------ 
+
+    // code is : ixxaccccccdddjjj -> (opcode)(extraForA)(comp)(comp)(dest[A[5]/M[4]/D[3]])(jump)
+    // i=0 if A instruction, i=1 if C instruction
+    // figure out instruction type:
+    Not(in=instruction[15], out=isA);
+    Not(in=isA, out=isC);
+
+    // ----------------------------------------- ARegister ------------------------------------ 
+
+    // ARegister prepreation:
+    // mux16 includes ALU output and instruction binary code
+    
+    // if we have a c instruction that is directed to A we need to load it too.
+    And(a=isC, b=instruction[5], out=loadingCheckA);
+
+    // if isA -> instruction is loaded, else, ALUoutput stays.
+    Or(a=isA, b=loadingCheckA, out=loadToA);
+
+    // than we check if we output alu or instruction, if it is a c, than alu.
+    Mux16(a=instruction, b=ALUoutput, sel=loadingCheckA, out=toRegisterA);
+    
+    // the ARegister:
+    // c : load is the MSB of instructions 
+    // which indicates if it is an A instruction or c instruction.
+    // load : binary code what we input into the A register, instruction[5]
+    ARegister(in=toRegisterA, load=loadToA, out=ARegisterOutput);
+     
+    // ----------------------------------------- DRegister ------------------------------------ 
+
+    // ALU prepreation:
+    // mux16 includes inM and RegisterA output
+    // c : 
+    Mux16(a=ARegisterOutput, b=inM, sel=instruction[12], out=toALUfromMux);
+
+    // ALU prepreation:
+    // load : binary code what we input into the D register, instruction[4]
+    // if we have a c instruction that is directed to A we need to load it too.
+    And(a=isC, b=instruction[4], out=loadToD);
+    DRegister(in=ALUoutput, load=loadToD, out=DRegisterOutput);
+
+    // ----------------------------------------- ALU ------------------------------------ 
+
+    // ALU:
+    ExtendAlu(x=DRegisterOutput,y=toALUfromMux,instruction=instruction[6..14],out=ALUoutput, out=outM,zr=zr,ng=ng);
+
+    // ----------------------------------------- PC ------------------------------------ 
+
+    Not(in=ng, out=JGEflag); // if number is not negative -> its positive or equals 0.
+    Not(in=zr, out=notZero);
+    And(a=JGEflag, b=notZero, out=posFlag);
+
+    // checking jump conditions : 
+    And(a=instruction[0], b=posFlag, out=JGT); // if posFlag = 1 -> ALU out is positive -> JGT allowed.
+    And(a=instruction[1], b=zr, out=JEQ); // if zeroFlag = 1 -> ALU out is 0 -> JEQ allowed.
+    And(a=instruction[2], b=ng, out=JLT);  // if negFlag = 1 -> ALU out is negative -> JLT allowed.
+
+    Or(a=JEQ, b=JLT, out=JLE); // if JEQ or JLT were met -> JLE will be met too
+    Or(a=JLE, b=JGT, out=condition);  
+
+    // so if we got a c instruction we may jump.
+    And(a=isC, b=condition, out=loadPremission); // Only jump if C instruction
+
+    PC(in=ARegisterOutput, inc=true, load=loadPremission, reset=reset, out[0..14]=pc);
+
+    // ----------------------------------------- write To M ------------------------------------ 
+
+    // A<->M are connected, the value inside adress in A is stored in M, therefore M gets it's address.
+    // so we do 2 nots, so the value doesn't change.
+    Not16(in=ARegisterOutput, out[0..14]=toAddressM);
+    Not16(in[0..14]=toAddressM, in[15]=false, out[0..14]=addressM);
+
+    // if we have an instruction to write to M, we do so.
+    And(a=instruction[3], b=isC, out=writeM);
+}
+

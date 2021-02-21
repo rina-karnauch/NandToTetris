@@ -1,0 +1,768 @@
+function Corona.new 0
+push constant 1
+call Memory.alloc 1
+pop pointer 0
+push constant 63
+call Array.new 1
+pop this 0
+push constant 0
+push this 0
+add
+push constant 5
+push constant 3
+call Point.new 2
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 1
+push this 0
+add
+push constant 8
+push constant 3
+call Point.new 2
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 2
+push this 0
+add
+push constant 3
+push constant 4
+call Point.new 2
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 3
+push this 0
+add
+push constant 6
+push constant 4
+call Point.new 2
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 4
+push this 0
+add
+push constant 7
+push constant 4
+call Point.new 2
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 5
+push this 0
+add
+push constant 8
+push constant 4
+call Point.new 2
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 6
+push this 0
+add
+push constant 9
+push constant 4
+call Point.new 2
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 7
+push this 0
+add
+push constant 12
+push constant 4
+call Point.new 2
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 8
+push this 0
+add
+push constant 5
+push constant 5
+call Point.new 2
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 9
+push this 0
+add
+push constant 6
+push constant 5
+call Point.new 2
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 10
+push this 0
+add
+push constant 7
+push constant 5
+call Point.new 2
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 11
+push this 0
+add
+push constant 8
+push constant 5
+call Point.new 2
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 12
+push this 0
+add
+push constant 9
+push constant 5
+call Point.new 2
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 13
+push this 0
+add
+push constant 10
+push constant 5
+call Point.new 2
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 14
+push this 0
+add
+push constant 11
+push constant 5
+call Point.new 2
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 15
+push this 0
+add
+push constant 5
+push constant 6
+call Point.new 2
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 16
+push this 0
+add
+push constant 6
+push constant 6
+call Point.new 2
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 17
+push this 0
+add
+push constant 7
+push constant 6
+call Point.new 2
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 18
+push this 0
+add
+push constant 8
+push constant 6
+call Point.new 2
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 19
+push this 0
+add
+push constant 9
+push constant 6
+call Point.new 2
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 20
+push this 0
+add
+push constant 10
+push constant 6
+call Point.new 2
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 21
+push this 0
+add
+push constant 11
+push constant 6
+call Point.new 2
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 22
+push this 0
+add
+push constant 13
+push constant 6
+call Point.new 2
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 23
+push this 0
+add
+push constant 4
+push constant 7
+call Point.new 2
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 24
+push this 0
+add
+push constant 5
+push constant 7
+call Point.new 2
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 25
+push this 0
+add
+push constant 6
+push constant 7
+call Point.new 2
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 26
+push this 0
+add
+push constant 7
+push constant 7
+call Point.new 2
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 27
+push this 0
+add
+push constant 8
+push constant 7
+call Point.new 2
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 28
+push this 0
+add
+push constant 9
+push constant 7
+call Point.new 2
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 29
+push this 0
+add
+push constant 10
+push constant 7
+call Point.new 2
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 30
+push this 0
+add
+push constant 11
+push constant 7
+call Point.new 2
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 31
+push this 0
+add
+push constant 4
+push constant 8
+call Point.new 2
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 32
+push this 0
+add
+push constant 5
+push constant 8
+call Point.new 2
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 33
+push this 0
+add
+push constant 6
+push constant 8
+call Point.new 2
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 34
+push this 0
+add
+push constant 7
+push constant 8
+call Point.new 2
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 35
+push this 0
+add
+push constant 8
+push constant 8
+call Point.new 2
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 36
+push this 0
+add
+push constant 9
+push constant 8
+call Point.new 2
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 37
+push this 0
+add
+push constant 10
+push constant 8
+call Point.new 2
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 38
+push this 0
+add
+push constant 11
+push constant 8
+call Point.new 2
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 39
+push this 0
+add
+push constant 12
+push constant 8
+call Point.new 2
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 40
+push this 0
+add
+push constant 2
+push constant 9
+call Point.new 2
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 41
+push this 0
+add
+push constant 5
+push constant 9
+call Point.new 2
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 42
+push this 0
+add
+push constant 6
+push constant 9
+call Point.new 2
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 43
+push this 0
+add
+push constant 7
+push constant 9
+call Point.new 2
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 44
+push this 0
+add
+push constant 8
+push constant 9
+call Point.new 2
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 45
+push this 0
+add
+push constant 9
+push constant 9
+call Point.new 2
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 46
+push this 0
+add
+push constant 10
+push constant 9
+call Point.new 2
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 47
+push this 0
+add
+push constant 4
+push constant 10
+call Point.new 2
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 48
+push this 0
+add
+push constant 5
+push constant 10
+call Point.new 2
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 49
+push this 0
+add
+push constant 6
+push constant 10
+call Point.new 2
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 50
+push this 0
+add
+push constant 7
+push constant 10
+call Point.new 2
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 51
+push this 0
+add
+push constant 8
+push constant 10
+call Point.new 2
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 52
+push this 0
+add
+push constant 9
+push constant 10
+call Point.new 2
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 53
+push this 0
+add
+push constant 10
+push constant 10
+call Point.new 2
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 54
+push this 0
+add
+push constant 7
+push constant 11
+call Point.new 2
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 55
+push this 0
+add
+push constant 8
+push constant 11
+call Point.new 2
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 56
+push this 0
+add
+push constant 9
+push constant 11
+call Point.new 2
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 57
+push this 0
+add
+push constant 12
+push constant 11
+call Point.new 2
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 58
+push this 0
+add
+push constant 4
+push constant 12
+call Point.new 2
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 59
+push this 0
+add
+push constant 10
+push constant 12
+call Point.new 2
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 60
+push this 0
+add
+push constant 6
+push constant 13
+call Point.new 2
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 61
+push this 0
+add
+push constant 7
+push constant 13
+call Point.new 2
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 62
+push this 0
+add
+push constant 9
+push constant 13
+call Point.new 2
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push pointer 0
+return
+function Corona.displayCorona 2
+push argument 0
+pop pointer 0
+push constant 0
+pop local 0
+label WHILE_EXP0
+push local 0
+push constant 63
+lt
+not
+if-goto WHILE_END0
+push local 0
+push this 0
+add
+pop pointer 1
+push that 0
+pop local 1
+push local 1
+call Point.display 1
+pop temp 0
+push local 0
+push constant 1
+add
+pop local 0
+goto WHILE_EXP0
+label WHILE_END0
+push constant 0
+return
+function Corona.moveCorona 4
+push argument 0
+pop pointer 0
+push argument 1
+call Point.getX 1
+pop local 2
+push argument 1
+call Point.getY 1
+pop local 3
+push constant 0
+pop local 0
+push pointer 0
+call Corona.undrawCorona 1
+pop temp 0
+push constant 0
+not
+call Screen.setColor 1
+pop temp 0
+label WHILE_EXP0
+push local 0
+push constant 63
+lt
+not
+if-goto WHILE_END0
+push local 0
+push this 0
+add
+pop pointer 1
+push that 0
+pop local 1
+push local 1
+push local 2
+push local 3
+call Point.move 3
+pop temp 0
+push local 0
+push this 0
+add
+push local 1
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push local 0
+push constant 1
+add
+pop local 0
+goto WHILE_EXP0
+label WHILE_END0
+push constant 0
+return
+function Corona.undrawCorona 0
+push argument 0
+pop pointer 0
+push constant 0
+call Screen.setColor 1
+pop temp 0
+push pointer 0
+call Corona.displayCorona 1
+pop temp 0
+push constant 0
+return
+function Corona.deleteCorona 1
+push argument 0
+pop pointer 0
+push constant 0
+pop local 0
+label WHILE_EXP0
+push local 0
+push constant 63
+lt
+not
+if-goto WHILE_END0
+push local 0
+push this 0
+add
+pop pointer 1
+push that 0
+call Memory.deAlloc 1
+pop temp 0
+push local 0
+push constant 1
+add
+pop local 0
+goto WHILE_EXP0
+label WHILE_END0
+push this 0
+call Memory.deAlloc 1
+pop temp 0
+push constant 0
+return
+function Corona.getPixels 0
+push argument 0
+pop pointer 0
+push this 0
+return
+function Corona.length 0
+push argument 0
+pop pointer 0
+push constant 63
+return

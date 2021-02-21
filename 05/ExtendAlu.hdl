@@ -1,0 +1,70 @@
+/**
+* The input of the extends ALU is instruction[9] and x[16],y[16].
+* the output is define as follows:
+* If instruction[7..8] equals 1 the the output is exactly as the ALU.
+* Where instruction[5]=zx,instruction[4]=nx,...,instruction[0]=no.
+* If instruction[7] equals 0 the output will be x*y and disregard the rest 
+* of the instruction.
+*
+* If instruction[8] equals 0 the output will be shift.
+* Then, if instruction[4] equals 0 it will return shift of y otherwise shift 
+* of x, moreover if instruction[5] equals 0 it will return shift right 
+* otherwise shift left.
+**/
+CHIP ExtendAlu{
+     IN x[16],y[16],instruction[9];
+     OUT out[16],zr,ng;
+     
+     PARTS:
+
+     // kind of instruction table:
+     /*
+     *  instruction[8,7] |  out
+     *  ---------------- | -----
+     *        00         |  x*y
+     *        01         |  shift 
+     *        10         |  x*y
+     *        11         |  ALU output
+     */
+
+     // kind of shift table:
+     /*
+     *  instruction[4,5] |  out
+     *  ---------------- | -----
+     *        00         |  shift right of y
+     *        01         |  shift right of x
+     *        10         |  shift left of y
+     *        11         |  shift left of x
+     */
+
+     // check if [8,7] == 11
+     And(a=instruction[7], b=instruction[8], out=sevenANDeight);
+
+     // check if we use x or y
+     // instruction[4] = 0 we out y
+     // instruction[4] = 1 we out x.
+     Mux16(a=y, b=x, sel=instruction[4], out=valueForShift);
+
+     // calculate shifts of our out
+     ShiftRight(in=valueForShift, out=RShiftOut);
+     ShiftLeft(in=valueForShift, out=LShiftOut);
+
+     // if instruction[5] = 0 we shift right
+     // if instruction[5] = 1 we shift left
+     Mux16(a=RShiftOut, b=LShiftOut, sel=instruction[5], out=shiftOutput);
+
+     // we calculate x*y 
+     Mul(a=x,b=y,out=xTIMESy);
+
+     // ALU calculation 
+     ALU(x=x, y=y, zx=instruction[5], nx=instruction[4], zy=instruction[3], ny=instruction[2], f=instruction[1], no=instruction[0], out=ALUout, zr=zz, ng=zzz);
+
+     // if instruction[7] = 0 we output x*y
+     // else we output the shift
+     Mux16(a=xTIMESy, b=shiftOutput, sel=instruction[7], out=pickedOperation);
+     // if instruction[8] = 0 we output we output the shift else the ALU
+     Mux16(a=pickedOperation, b=ALUout, sel=sevenANDeight, out=forFlagRefactoring, out=out);
+
+     // fix the zr and ng flags
+     ALU(x[0..15]=true, y=forFlagRefactoring, zx=true, nx=true, zy=false, ny=false, f=false, no=false, out=none, zr=zr, ng=ng);
+}

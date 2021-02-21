@@ -1,0 +1,839 @@
+// File name: projects/09/Game/Game.jack
+
+/** game object to run to play the corona game */
+class Game{
+
+    field int score; // amount of lives left for game
+    field Displayer display; // current displayed screen object
+    field char pressedKey; // pressed key
+
+    field Corona coronaObject; // corona object
+
+
+    field Dog dogPlayer; // dog player
+    field Cat catPlayer; // cat player
+    field Dragon dragonPlayer; // dragon player
+    // cat - 1 
+    // dog - 2
+    // dragon - 3
+    field int currentPlayer; //eynam change to string
+
+    field String scoreString;
+    field String outOfString;
+    field String scoreIntChar;
+
+    field Array placements;
+
+    field int speed;
+
+    /** Constructs a new Game. */
+    constructor Game new() {
+      // Creates a 30 by 30 pixels square and positions it at the top-left
+      // of the screen.
+      
+        let score = 0; 
+        let display = Displayer.new(); 
+
+        do updatePlaces();
+
+        let dogPlayer = null;
+        let catPlayer = null;
+        let dragonPlayer = null;
+        let coronaObject = Corona.new(); 
+
+        let scoreString = String.new(7);
+        let scoreString = "Score:";
+        let outOfString = String.new(3);
+        let outOfString = "/15";
+        
+        let scoreIntChar = String.new(2);
+
+        let speed = 10;
+        do scoreIntChar.setInt(score);
+        
+
+        return this;
+    }
+
+    /**
+    update corona places
+    */
+    method void updatePlaces(){
+        let placements = Array.new(15);
+        let placements[0] = Point.new(100,130);
+        let placements[1] = Point.new(300,70);
+        let placements[2] = Point.new(140,47);
+        let placements[3] = Point.new(200,53);
+        let placements[4] = Point.new(76,76);
+        let placements[5] = Point.new(205,164);
+        let placements[6] = Point.new(240,86);
+        let placements[7] = Point.new(450,190);
+        let placements[8] = Point.new(98,109);
+        let placements[9] = Point.new(387,47);
+        let placements[10] = Point.new(70,150);
+        let placements[11] = Point.new(205,76);
+        let placements[12] = Point.new(98,164);
+        let placements[13] = Point.new(320,106);
+        let placements[14] = Point.new(100,49);
+        return;
+    }
+
+    /**
+    draw lines not to cross in game
+    */
+    method void draw_lines(){
+
+        do Screen.drawLine(12,12,500,12);
+        do Screen.drawLine(17,17,495,17);
+
+        do Screen.drawLine(12,244,500,244);
+        do Screen.drawLine(17,239,495,239);
+
+        do Screen.drawLine(12,12,12,244);
+        do Screen.drawLine(17,17,17,239);
+
+        do Screen.drawLine(500,12,500,244);
+        do Screen.drawLine(495,12,495,239);
+
+        return;
+    }
+
+    /**
+    helper method to display enterance to the game
+    */
+    method void enterance_helper(){
+        do Displayer.draw_corona_big(1500);
+        do Output.moveCursor(10,10);
+        do Output.printString("Hello, survivor!");
+        do Output.println();
+        do Output.moveCursor(11,10);
+        do Output.printString("press s to start the corona party");
+        do Output.println();
+        do Output.moveCursor(12,10);
+        do Output.printString("press q to end game");
+        do Output.println();
+
+        
+        return;
+    }
+
+    /**
+    method to display enterance on game
+    */
+    method boolean display_enterance(){
+        var boolean exitGame, startGame, gameFlag;
+
+        let gameFlag = false;
+        let exitGame = false;
+        let startGame = false;
+
+        // diaplying section begin
+        do enterance_helper();
+        // displaying section end
+
+        while (~exitGame) {
+            if (pressedKey = 81) { // q key
+                let exitGame = true;
+                let startGame = false;
+            }
+            if (pressedKey = 83) { // s key
+                let exitGame = true;
+                let startGame = true;
+            }
+            let pressedKey = Keyboard.keyPressed();
+        }
+
+        // flag of game on
+        /*
+        if we started game, and don't exit we play on
+        */
+
+        let gameFlag = startGame & exitGame; 
+        return gameFlag;
+    }
+
+    /**
+    helper method to display player picking to the game
+    */
+    method void player_picking_helper(){
+        do Screen.clearScreen();
+        do Displayer.draw_corona_big(100);
+        do Displayer.draw_corona_small(6000);
+        do Displayer.draw_corona_small(3200);
+        do Displayer.draw_corona_small(400);
+        do Displayer.draw_corona_small(1500);
+        do Displayer.draw_corona_mid(600);
+        do Displayer.draw_dog(6300);
+        do Displayer.draw_cat(5800);
+        do Displayer.draw_dragon(6200);
+
+        do Output.moveCursor(10,10);
+        do Output.printString("pick a player:");
+        do Output.println();
+        do Output.moveCursor(11,10);
+        do Output.printString("press c for cat");
+        do Output.println();
+        do Output.moveCursor(12,10);
+        do Output.printString("press d for dog");
+        do Output.println();
+        do Output.moveCursor(13,10);
+        do Output.printString("press f for fire dragon");
+        do Output.moveCursor(14,10);
+        do Output.printString("press q to end game");
+        do Output.println();
+
+
+        return;
+    }
+
+    /**
+    method to display picking a player entry on game
+    */
+    method char pick_player(){
+
+        var boolean didPlayerPress;
+        let didPlayerPress = false;
+
+        // diaplying section begin
+        do player_picking_helper();
+        // displaying section end
+
+        // check if we pressed anything to our needs
+        let didPlayerPress = false;
+        
+        while(~didPlayerPress){
+            if (pressedKey = 81){ // q
+                let didPlayerPress = true;
+            }
+            if (pressedKey = 67){ // cat
+                let didPlayerPress = true;
+            }
+            if (pressedKey = 68){ // dog
+                let didPlayerPress = true;
+            }
+            if (pressedKey = 70){ // fire-dragon
+                let didPlayerPress = true;
+            }
+            let pressedKey = Keyboard.keyPressed();
+        }
+        return pressedKey;
+    }
+
+    /**
+    method to run the game
+    */
+    method boolean run() {
+        var boolean goToEnterance;
+        var char goToGame;
+        var boolean backToGame;
+
+        do Screen.clearScreen();
+
+        let goToEnterance = display_enterance();
+
+        if (goToEnterance){
+            let goToGame = pick_player();
+        }
+        else{
+            // we exit game
+            return backToGame;
+        }
+
+        if (goToGame = 81){
+            // picked to exit upon enterance again
+            return false;
+        }
+        // we probably wanted to start
+        if (goToGame = 67) { // cat playing
+            let currentPlayer = 1;
+            let backToGame = run_cat();
+            do catPlayer.deleteCat();
+            do Memory.deAlloc(catPlayer);
+        }
+        if(goToGame = 68) { // dog playing
+            let currentPlayer = 2;
+            let backToGame = run_dog();
+            do dogPlayer.deleteDog();
+            do Memory.deAlloc(dogPlayer);
+        }
+        if(goToGame = 70) { // dragon playing
+            let currentPlayer = 3;
+            let backToGame = run_dragon();
+            do dragonPlayer.deleteDragon();
+            do Memory.deAlloc(dragonPlayer);
+        }
+        // we got here only if we quited the game.
+
+        return backToGame;
+    }
+
+    /**
+    method to place corona on screen
+    */
+    method void placeCorona(){
+        var Point newPlace;
+        let newPlace = placements[score];
+        do coronaObject.moveCorona(newPlace);
+        do coronaObject.displayCorona();
+        return;
+    }
+
+    /**
+    method to play the cat player
+    */
+    method boolean run_cat(){
+        var boolean exit;
+        var boolean check;
+        var boolean collosionChecker;
+        var boolean backToGame;
+
+        var Array playerPixels;
+        var int lengthOfPlayer;
+        
+
+        let collosionChecker = false;
+        let backToGame = true;
+        let exit = false;
+        do Screen.clearScreen();
+
+        let catPlayer = Cat.new(); 
+        do catPlayer.moveCat(250,115);
+        do catPlayer.displayCat();
+        do placeCorona();
+
+        while (~exit){
+            
+            do Output.moveCursor(0,1);
+            do Output.printString(scoreString);
+            do Output.moveCursor(0,9);
+            do Output.printString(outOfString);
+            do Output.moveCursor(0,7);
+            do Output.printString(scoreIntChar);
+            do draw_lines();
+            
+            let pressedKey = readKeyboard();
+            
+            if(pressedKey = 81){
+                let exit = true;
+                do catPlayer.deleteCat();
+                let backToGame = false;
+            }
+
+            if(pressedKey = 131){
+                // up
+                do catPlayer.displayCat();
+                do catPlayer.moveCat(0,-1*speed);
+                do catPlayer.displayCat();
+                
+                let check = checkBounds();
+                // out of bounds
+                if (check){
+                    let exit = true;
+                }
+
+                do catPlayer.displayCat();
+            }
+            if(pressedKey = 133){
+                // down
+                do catPlayer.displayCat();
+                do catPlayer.moveCat(0,speed);
+                do catPlayer.displayCat();
+
+                let check = checkBounds();
+                // out of bounds
+                if (check){
+                    let exit = true;
+                }
+
+                do catPlayer.displayCat();
+            }
+            if(pressedKey = 130){
+                // left
+                do catPlayer.displayCat();
+                do catPlayer.moveCat(-1*speed,0);
+                do catPlayer.displayCat();
+                
+
+                let check = checkBounds();
+                // out of bounds
+                if (check){
+                    let exit = true;
+                }
+
+                do catPlayer.displayCat();
+            }
+            if(pressedKey = 132){
+                // right
+                do catPlayer.displayCat();
+                do catPlayer.moveCat(speed,0);
+                do catPlayer.displayCat();
+
+                let check = checkBounds();
+                // out of bounds
+                if (check){
+                    do displayLoss();
+                    let exit = true;
+                }
+
+                do catPlayer.displayCat();
+            } 
+
+            let playerPixels = catPlayer.getPixels();
+            let lengthOfPlayer = catPlayer.length();
+
+            let collosionChecker = checkCollosion(playerPixels, lengthOfPlayer);
+            if (collosionChecker){
+                do coronaObject.deleteCorona();
+                let score = score + 1;
+                do scoreIntChar.setInt(score);
+                if (score = 15){
+                    do displayWinnery();
+                    let exit = true;
+                }
+                if (score = 4){
+                    let speed = speed + 5;
+                }
+                if (score = 7){
+                    let speed = speed + 3;
+                }
+                if (score = 10){
+                    let speed = speed + 2;
+                }
+                if (score < 15){
+                    do coronaObject.undrawCorona();
+                    let coronaObject = Corona.new();
+                    do placeCorona();
+                }
+            }     
+        } 
+        return backToGame;
+    }
+
+    /**
+    method to play the dog do
+    */
+    method boolean run_dog(){
+
+        var boolean exit;
+        var boolean backToGame;
+        var boolean check;
+        var boolean collosionChecker;
+
+        var Array playerPixels;
+        var int lengthOfPlayer;
+        
+
+        let collosionChecker = false;
+        let backToGame = true;
+        let exit = false;
+        do Screen.clearScreen();
+
+        let dogPlayer = Dog.new();
+        do dogPlayer.moveDog(250,115);
+        do dogPlayer.displayDog();
+        do placeCorona();
+
+
+        while (~exit){
+            
+            do Output.moveCursor(0,1);
+            do Output.printString(scoreString);
+            do Output.moveCursor(0,9);
+            do Output.printString(outOfString);
+            do Output.moveCursor(0,7);
+            do Output.printString(scoreIntChar);
+            do draw_lines();
+            
+            let pressedKey = readKeyboard();
+            
+            if(pressedKey = 81){
+                let exit = true;
+                do dogPlayer.deleteDog();
+                let backToGame = false;
+            }
+
+            if(pressedKey = 131){
+                // up
+                do dogPlayer.displayDog();
+                do dogPlayer.moveDog(0,-1*speed);
+                do dogPlayer.displayDog();
+                
+                let check = checkBounds();
+                // out of bounds
+                if (check){
+                    let exit = true;
+                }
+
+                do dogPlayer.displayDog();
+            }
+            if(pressedKey = 133){
+                // down
+                do dogPlayer.displayDog();
+                do dogPlayer.moveDog(0,speed);
+                do dogPlayer.displayDog();
+
+                let check = checkBounds();
+                // out of bounds
+                if (check){
+                    let exit = true;
+                }
+
+                do dogPlayer.displayDog();
+            }
+            if(pressedKey = 130){
+                // left
+                do dogPlayer.displayDog();
+                do dogPlayer.moveDog(-1*speed,0);
+                do dogPlayer.displayDog();
+                
+
+                let check = checkBounds();
+                // out of bounds
+                if (check){
+                    let exit = true;
+                }
+
+                do dogPlayer.displayDog();
+            }
+            if(pressedKey = 132){
+                // right
+                do dogPlayer.displayDog();
+                do dogPlayer.moveDog(speed,0);
+                do dogPlayer.displayDog();
+
+                let check = checkBounds();
+                // out of bounds
+                if (check){
+                    do displayLoss();
+                    let exit = true;
+                }
+
+                do dogPlayer.displayDog();
+            } 
+
+            let playerPixels = dogPlayer.getPixels();
+            let lengthOfPlayer = dogPlayer.length();
+
+            let collosionChecker = checkCollosion(playerPixels, lengthOfPlayer);
+
+            if (collosionChecker){
+                do coronaObject.deleteCorona();
+                let score = score + 1;
+                do scoreIntChar.setInt(score);
+                if (score = 15){
+                    do displayWinnery();
+                    let exit = true;
+                }
+                if (score = 4){
+                    let speed = speed + 5;
+                }
+                if (score = 7){
+                    let speed = speed + 3;
+                }
+                if (score = 10){
+                    let speed = speed + 2;
+                }
+                if (score < 15){
+                    do coronaObject.undrawCorona();
+                    let coronaObject = Corona.new();
+                    do placeCorona();
+                }
+            }     
+        } 
+        return backToGame;
+    }
+
+
+    /**
+    method to play the dragon player
+    */
+    method boolean run_dragon(){
+        var boolean exit;
+        var boolean check;
+        var boolean backToGame;
+        var boolean collosionChecker;
+
+        var Array playerPixels;
+        var int lengthOfPlayer;
+        
+
+        let collosionChecker = false;
+        let backToGame = true;
+        let exit = false;
+        do Screen.clearScreen();
+
+        let dragonPlayer = Dragon.new();
+        do dragonPlayer.moveDragon(250,115);
+        do dragonPlayer.displayDragon();
+        do placeCorona();
+
+        while (~exit){
+            
+            do Output.moveCursor(0,1);
+            do Output.printString(scoreString);
+            do Output.moveCursor(0,9);
+            do Output.printString(outOfString);
+            do Output.moveCursor(0,7);
+            do Output.printString(scoreIntChar);
+            do draw_lines();
+            
+            let pressedKey = readKeyboard();
+            
+            if(pressedKey = 81){
+                let exit = true;
+                do dogPlayer.deleteDog();
+                let backToGame = false;
+            }
+
+            if(pressedKey = 131){
+                // up
+                do dragonPlayer.displayDragon();
+                do dragonPlayer.moveDragon(0,-1*speed);
+                do dragonPlayer.displayDragon();
+                
+                let check = checkBounds();
+                // out of bounds
+                if (check){
+                    let exit = true;
+                }
+
+                do dragonPlayer.displayDragon();
+            }
+            if(pressedKey = 133){
+                // down
+                do dragonPlayer.displayDragon();
+                do dragonPlayer.moveDragon(0,speed);
+                do dragonPlayer.displayDragon();
+
+                let check = checkBounds();
+                // out of bounds
+                if (check){
+                    let exit = true;
+                }
+
+                do dragonPlayer.displayDragon();
+            }
+            if(pressedKey = 130){
+                // left
+                do dragonPlayer.displayDragon();
+                do dragonPlayer.moveDragon(-1*speed,0);
+                do dragonPlayer.displayDragon();
+                
+                let check = checkBounds();
+                // out of bounds
+                if (check){
+                    let exit = true;
+                }
+
+                do dragonPlayer.displayDragon();
+            }
+            if(pressedKey = 132){
+                // right
+                do dragonPlayer.displayDragon();
+                do dragonPlayer.moveDragon(speed,0);
+                do dragonPlayer.displayDragon();
+
+                let check = checkBounds();
+                // out of bounds
+                if (check){
+                    do displayLoss();
+                    let exit = true;
+                }
+
+                do dragonPlayer.displayDragon();
+            } 
+
+            let playerPixels = dragonPlayer.getPixels();
+            let lengthOfPlayer = dragonPlayer.length();
+
+            let collosionChecker = checkCollosion(playerPixels, lengthOfPlayer);
+
+            if (collosionChecker){
+                do coronaObject.deleteCorona();
+                let score = score + 1;
+                do scoreIntChar.setInt(score);
+                if (score = 15){
+                    do displayWinnery();
+                    let exit = true;
+                }
+                if (score = 4){
+                    let speed = speed + 5;
+                }
+                if (score = 7){
+                    let speed = speed + 3;
+                }
+                if (score = 10){
+                    let speed = speed + 2;
+                }
+                if (score < 15){
+                    do coronaObject.undrawCorona();
+                    let coronaObject = Corona.new();
+                    do placeCorona();
+                }
+            }     
+        } 
+        return backToGame;
+    }
+
+    /**
+    method to return new press on keyboard
+    */
+    method char readKeyboard(){
+        var char newPress;
+
+        let newPress = Keyboard.keyPressed();
+        if (newPress = 131){
+            return newPress;
+        }
+        if (newPress = 132){
+            return newPress;
+        }
+        if (newPress = 130){
+            return newPress;
+        }
+        if (newPress = 133){
+            return newPress;
+        }
+        if (newPress = 81){
+            return newPress;
+        }
+        else{
+            return pressedKey;
+        }
+    }
+
+
+    /**
+    method to check if object collisioned with corona
+    */
+    method boolean checkCollosion(Array playerPixels, int lengthOfPlayer){
+        var Array coronaPixels;
+        var int lengthOfCorona;
+        var int i;
+        var int j;
+
+        var Point coronaPoint;
+        var Point playerPoint;
+
+        var boolean checkPoints;
+
+        let coronaPixels = coronaObject.getPixels();
+        let lengthOfCorona = coronaObject.length();
+
+        let i=0;
+        let j=0;
+        
+        while (i<lengthOfCorona){
+            while(j<lengthOfPlayer){
+                let coronaPoint = coronaPixels[i];
+                let playerPoint = playerPixels[j];
+
+                let checkPoints = coronaPoint.comparePoints(playerPoint);
+                if (checkPoints){
+                    return true;
+                }
+                let j=j+1;
+            }
+            let i=i+1;
+        }
+        return false;
+   }
+
+
+    /**
+    method to check the bounds of the player
+    */
+    method boolean checkBounds(){
+
+        var boolean bounds;
+
+        if (currentPlayer = 1){
+            let bounds = catPlayer.checkScreen();
+            if (bounds){
+                do catPlayer.undrawCat();
+            }
+        }
+
+        if (currentPlayer = 2){
+            let bounds = dogPlayer.checkScreen();
+            if (bounds){
+                do dogPlayer.undrawDog();
+            }
+        }
+
+        if (currentPlayer = 3){
+            let bounds = dragonPlayer.checkScreen();
+            if (bounds){
+                do dragonPlayer.undrawDragon();
+            }
+        }
+        
+        if (bounds){
+            do Output.moveCursor(15,15);
+            do Output.printString("passed bounds :(");
+            do Output.println();
+            do Output.moveCursor(16,16);
+            do Output.printString("game is over.");
+            do Sys.wait(2000);
+            return true;
+        }
+        return false;
+    }
+
+    /**
+    method to place corona on screen
+    */
+    method void displayWinnery(){
+        do Screen.clearScreen();
+        do draw_lines();
+        do Output.moveCursor(15,15);
+        do Output.printString("WE HAVE A WINNER!");
+        do Screen.clearScreen();
+        do Sys.wait(500);
+        return;
+    }
+
+    /** Disposes this game. */
+    method void dispose() {
+        var int i;
+
+        let i = 0;
+
+        while(i<15){
+            do Memory.deAlloc(placements[i]);
+            let i=i+1;
+        }
+
+        do Screen.clearScreen();
+        
+        
+        do Memory.deAlloc(display);
+        do Memory.deAlloc(placements);
+        do Memory.deAlloc(scoreIntChar);
+        do Memory.deAlloc(scoreString);
+        do Memory.deAlloc(outOfString);
+        do Memory.deAlloc(coronaObject);
+
+        do Output.moveCursor(10,10);
+        do Output.printString("nice playing with you!");
+        do Screen.clearScreen();
+
+        return;
+   }
+
+    /**
+    method to place corona on screen
+    */
+    method void displayLoss(){
+        do Screen.clearScreen();
+        do draw_lines();
+        do Output.moveCursor(15,15);
+        do Output.printString("GAME OVER!");
+        do Screen.clearScreen();
+        do Sys.wait(500);
+        return;
+    }
+
+
+
+}

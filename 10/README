@@ -1,0 +1,37 @@
+===============================================================================
+Rina Karnauch, rina.karnauch@mail.huji.ac.il
+Eynam Wassertheil, eynam.wassertheil@mail.huji.ac.il
+===============================================================================
+
+                           Project 10 - Jack Compiler part 1
+                           ---------------------------------
+
+
+Submitted Files
+---------------
+README - This file.
+JackAnalyzer - main runner of analyzing jack code
+Jack Tokenizer - creates tokens separated by our needs, expressionless handling
+ ouf our jack code, for our convenience for later compilation in the engine.
+ Mainly separated by regexs
+CompilationEngine - the main module which compiles part line by line, by
+detecting which kind of block we have (while/ class/ if / expression etc') and
+creating a fitting tree which will be added to its father. all branches are
+sons of the root which is the tree of the overall class.
+
+Remarks
+-------
+* we preferred changing the API and returning trees instead of printing line
+by line into a file. it helped us debug the semi-blocks(for example, a while
+handling tree it created inside compile while) and in need of compilation it
+was easy printing it into a testing xml file and checking if the problem in the
+xml output is in the while or outside, instead of going through diff'ing a lot
+of files and etc.
+* compilation engine holds an instance of the tokenizer to know on which token
+we are on since we assume the validity of the input. we did it like that
+because there are tokens which does not require a title, and there are those
+who need a title, in this way we may check the token's type / token's string
+which is figured out in tokenizer in an array of tuples, and then work
+accordingly.
+* Jack Analyzer holds the main method and runs it all together, calling
+tokenization and later on overall compilation.

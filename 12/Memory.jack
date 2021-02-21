@@ -1,0 +1,203 @@
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/12/Memory.jack
+
+/**
+ * This library provides two services: direct access to the computer's main
+ * memory (RAM), and allocation and recycling of memory blocks. The Hack RAM
+ * consists of 32,768 words, each holding a 16-bit binary number.
+ */ 
+class Memory {
+
+    /** for the RAM representation */
+    // for access to any place in the ram from 0 to 32767
+    static Array ram;
+    static Array heap;
+
+    // linked list of free places
+    static Array freeList;
+
+    /** Initializes the class. */
+    function void init() {
+
+        // as explained in 12.4 9:00 and on
+        // handling RAM representation
+
+        let ram = 0;
+
+        let heap = 2048; // heap conventions, heapBase
+
+        let freeList = 2048; // freeList start
+
+        let heap[0] = 0; // next
+        let heap[1] = 14335; // length of current linked list
+        return;
+
+    }
+
+    /** Returns the RAM value at the given address. */
+    function int peek(int address) {
+
+        var int wanted_value;
+        // ram is 0 therefore ram[address] = ram + address = address
+        let wanted_value = ram[address];
+        return wanted_value;
+    }
+
+    /** Sets the RAM value at the given address to the given value. */
+    function void poke(int address, int value) {
+
+        // ram is 0 therefore ram[address] = ram + address = address
+       let ram[address] = value;
+       return;
+    }
+
+    /** Finds an available RAM block of the given size and returns
+     *  a reference to its base address. */
+    function int alloc(int size) {
+        /*
+        let ram = 0;
+        let heap = 2048; // heap conventions, heapBase
+        let freeList = 2048; // freeList start
+        let heap[0] = 0; // next
+        let heap[1] = 14335; // length of current linked list
+        return;
+        */
+
+        // block to return
+        var Array block;
+        // current size
+        var int current_size;
+        // next block
+        var Array next;
+        // prev block
+        var Array last;
+        //do Output.printString("    e");
+
+         if(freeList = 0)
+        {
+            return 0;
+        }
+
+        /*
+        block looks like -
+
+        ----------
+        |  next  |
+        ----------
+        | c_size |
+        ----------
+        |        |
+        |        |
+        ----------
+
+        what we need -
+
+        |  addr  |
+        ----------
+        | c>size |
+        ----------
+        |        |
+        |        |
+        ----------
+        */
+
+        //do Output.printString("    b");
+        //let heap[2] = 1337;
+        let current_size = freeList[1]; // current block size we think about
+        //do Output.printString("    cb");
+        let block = freeList; // start of block
+        //let heap[2] = 1338;
+        let next = freeList[0]; // next block address
+        //let heap[2] = 1339;
+        //do Output.printString("    d");
+        if((current_size = (size+2)) | (current_size > (size+2)))
+        {
+            if(current_size = (size+2))
+            {
+                // we fill up exact block.
+                //let heap[2] = 1340;
+                let freeList = next; // we start freeList at next block
+                return block+2; // and return the block from its second place.
+            }
+            else
+            {
+                //do Output.printString("    e");
+
+                // change block size to size
+                let block[(current_size+1)-size] = size;
+                //do Output.printString("    q");
+                //do Output.printString("    c");
+
+                // size of freeList will reduce with size+2
+                let freeList[1] = current_size-(size+2);
+                /*
+                 block + current_size - size + 2:
+                 which is block + 2 + (places left)
+                 which means we given the lower space to the user.
+                */
+                return block+((current_size+1)-size)+1;
+
+            }
+                // anyways we don't reach here
+        }
+        // last = last free List from before
+        let last = freeList;
+        while(~(next=0)){
+        // while we find place
+            // if we find block, we go inside if:
+            if((current_size = (size+2)) | (current_size > (size+2))){
+                let block = next;
+                let current_size = next[1];
+                if(current_size = (size+2)){
+                    let last[0] = next[0];
+                    return block+2;
+                }
+                else{
+                    let block[(current_size+1)-size] = size;
+                    let next[1] = current_size-(size+2);
+                    return block+((current_size+1)-size)+1;
+
+                }
+            }
+            // else we go next looking for it:
+        let last = next;
+        let next = next[0];     
+        }
+        return 0;
+    }
+
+    /** De-allocates the given object (cast as an array) by making
+     *  it available for future allocations. */
+    function void deAlloc(Array o) {
+        var Array next;
+        if(freeList = 0)
+        {
+            let freeList = o-heap;
+            return;
+        }
+        else
+        {
+            if(freeList[0] = 0)
+            {
+                let freeList[0] = o-heap;
+                return;
+            }
+            else
+            {
+                let next = freeList[0];
+                while(~(next=0))
+                {
+                    if(next[0] = 0)
+                    {
+                        let next[0] = o-heap;
+                        return;
+                    }
+                    let next = next[0];
+                }
+                return;
+            }
+        }
+    }    
+}

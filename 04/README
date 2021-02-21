@@ -1,0 +1,35 @@
+===============================================================================
+Rina Karnauch, rina.karnauch@mail.huji.ac.il
+===============================================================================
+
+
+                           Project 4 - Machine Language
+                           ----------------------------
+  
+
+Submitted Files
+---------------
+README - This file.
+fill - folder of fill algorithm in hack language
+     * fill.asm - I/O handling, illustrates low lvl handling of screen
+       And keyboard usage by filling the screen or outfilling it.
+mult - folder of multiplication algorithm in hack language
+     * mult.asm - the program multiplies R0 and R1 which are RAM[0] and
+       RAM[1] and output the multiplication value to R2 which is RAM[2]
+sort - folder of sorting an array with bubble sort
+     * Sort.asm - sorting algorithm by bubble sort.
+divide - folder of dividing algorithm
+       * Divide.asm - dividing R13 and R14 (RAM[13] by RAM[14]) and outputting value
+	 to R15(RAM[15]), with no remainder.(DIV and not MOD).
+
+Remarks
+-------
+* sort it implemented with bubble sort.
+* multiplying is done with adding up the R1 value R0 times to itself- naive approach.
+* filling is done by checking the keyboard- if not pressed, screen coloured in all
+  white(all inputs are 0 for pixels), otherwise- pressed, than -1(which are 16 (1) bits).
+* divide is done by filling up powers of 2 inside our num since there is only 
+  representation of powers of 2 for each number.
+
+
+

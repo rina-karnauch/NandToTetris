@@ -1,0 +1,89 @@
+// File name: projects/09/Game/Point.jack
+
+/** class to represent a pixel */
+class Point{
+
+    field int x;
+    field int y;
+
+    /** Constructs a new Point object. */
+    constructor Point new(int xcoord, int ycoord) {
+        let x = xcoord;
+        let y = ycoord;
+        return this;
+    }
+
+    /**
+    getter for x coordinate of point
+    */
+    method int getX(){
+        return x;
+    }
+
+    /**
+    getter for y coordinate of point
+    */
+    method int getY(){
+        return y;
+    }
+
+    /**
+    adder for x coordinate
+    */
+    method void addToX(int toAdd){
+        let x = x + toAdd;
+        return;
+    }
+
+    /**
+    adder for y coordinate
+    */
+    method void addToY(int toAdd){
+        let y = y + toAdd;
+        return;
+    }
+
+    /**
+    adder for coordinates
+    */
+    method void move(int xa, int ya){
+        let y = y + ya;
+        let x = x + xa;
+        return;
+    }
+
+
+    /**
+    display pixel on screen
+    */
+    method void display(){
+        do Screen.drawPixel(x,y);
+        return;
+    }
+
+    /**
+    compare two points
+    */
+    method boolean comparePoints(Point b){
+
+        var int xb;
+        var int yb;
+
+        let xb = b.getX();
+        let yb = b.getY();
+
+        if (x=xb){
+            if(y=yb){
+                return true;
+            }
+        }
+        return false;
+    }
+    method void dispose() { //added disposal
+      do Memory.deAlloc(this);
+      return;
+   }
+
+
+
+}

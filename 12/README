@@ -1,0 +1,40 @@
+rina.karnauch, came1337
+===============================================================================
+Rina Karnauch, ID 319132353, rina.karnauch@mail.huji.ac.il
+Eynam Wassertheil, ID 207557935, eynam.wassertheil@mail.huji.ac.il
+===============================================================================
+
+                           Project 12 - Operating System Algorithms
+                           ----------------------------------------
+
+
+Submitted Files
+---------------
+README - This file.
+Array.jack - Represents an array in jack class.
+Keyboard.jack - A library for handling user input from the keyboard.
+Math.jack - A library of commonly used mathematical functions.
+Memory.jack - This library provides two services: direct access to the
+              computer's main memory (RAM), and allocation and recycling of
+              memory blocks.
+Output.jack - A library of functions for writing text on the screen.
+Screen.jack - A library of functions for displaying graphics on the screen.
+String.jack - Represents character strings.
+Sys.jack - A library that supports various program execution services.
+
+Remarks
+-------
+* preferred to handle line drawing in Screen.jack by sub-functions by
+  dividing the functions to handle line drawings, by thinking of a line
+  as a vector with a direction.
+* preferred creating powers of 2 array where needed and not using another
+  class implementation static array even if one already appeared, like in Math
+  and Screen.
+* multiplying in divide algorithm is handled with a remainder static class
+  field which helps us know last remainder of previous recursive division call.
+* instead of implementing a get_bit out of number, used x&(2^wantedBit)so get
+  weather the bit is 0 or 1.
+* MODing is done the same -> x_mod_16 = x&(2^15)
+* division is recursive and we have an algorithm working on positives,
+  therefore we found it useful to use a divide_helper method to divide
+  positives and then check the wanted sign.

@@ -1,0 +1,19 @@
+// by rina and eynam
+// File name: projects/09/Game/Main.jack
+
+/** Initializes a new corona game and runs it. */
+class Main {
+    function void main() {
+        var Game game;
+        var boolean backToEnterance;
+
+        let backToEnterance = true;
+        while (backToEnterance){
+            let game = Game.new();
+            let backToEnterance = game.run();
+            do game.dispose();
+        }
+        return;
+    }
+
+}

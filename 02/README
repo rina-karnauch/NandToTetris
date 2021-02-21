@@ -1,0 +1,32 @@
+===============================================================================
+Rina Karnauch, rina.karnauch@mail.huji.ac.il
+===============================================================================
+
+                           Project 2 - Boolean Arithmetic
+                           ------------------------------
+  
+
+Submitted Files
+---------------
+README - This file.
+HalfAdder.hdl - sum of two bits 
+FullAdder.hdl - sum of three bits
+Add16.hdl - adds two 16-bit values.
+Inc16.hdl - increments in by 1 bit
+ALU.hdl - arithmetic logic unit of our to be computer
+ShiftLeft.hdl - arithmetic left shift of a given 16 bit value
+ShiftRight.hdl - arithmetic right shift of a given 16 bit value
+Mul.hdl - multiplication of 2 given numbers
+Or16Way.hdl - 16 way or gate
+
+
+Remarks
+-------
+‫*‬ in the FullAdder instead of having a third half carry for the mid carries
+  We use an or.
+* in Add16, Inc16 we drop out the last carry- we don't need it.
+* Mul is implemented with shifts left, Muxes and then we add up all results
+  Just like long multiplication in decimal, than we figured out the sign
+  And handled the sign situation.
+* We implemented Or16Way which helped us in our files to figure out if an input
+  Is a 0.

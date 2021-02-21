@@ -1,0 +1,39 @@
+===============================================================================
+Rina Karnauch, rina.karnauch@mail.huji.ac.il
+Eynam Wassertheil, eynam.wassertheil@mail.huji.ac.il
+===============================================================================
+
+                           Project 11 - Jack Compiler part 2
+                           ---------------------------------
+
+
+Submitted Files
+---------------
+README - This file.
+JackCompiler -  main runner of analyzing jack code
+JackTokenier - creates tokens separated by our needs, expressionless handling
+               ouf our jack code, for our convenience for later compilation in
+               the engine.
+Mainly separated by regexs
+CompilationEngine - the main module which compiles part line by line, by
+                    detecting which kind of block we have
+                    (while/ class/ if / expression etc') and
+                    creating a compiling accordingly via the rules given
+                    in the lectures,
+                    recurssivly knowing what token is coming next
+SymbolTable - holds variables
+Remarks
+-------
+* we changed back the API from etree returner to a none/ int returner
+  accordingly to our needs.
+* we didn't us anymore our XML tree, we compiled via our tokens,
+* used our tags from project 10 to know which token is coming where,
+  all description were written using those description
+* compilation engine holds an instance of the tokenizer to know on which token
+  we are on since we assume the validity of the input. we did it like that
+  because there are tokens which does not require a title, and there are those
+  who need a title, in this way we may check the token's type / token's string
+  which is figured out in tokenizer in an array of tuples, and then work
+  accordingly.
+* Jack Analyzer holds the main method and runs it all together, calling
+  tokenization and later on overall compilation.

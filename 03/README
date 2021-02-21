@@ -1,0 +1,30 @@
+===============================================================================
+Rina Karnauch, rina.karnauch@mail.huji.ac.il
+===============================================================================
+
+                           Project 3 - Sequential Logic
+                           ----------------------------
+  
+
+Submitted Files
+---------------
+README - This file.
+a - folder 
+  * Bit.hdl - 1 bit register
+  * Register.hdl - 16 bit register
+  * RAM8.hdl - 8-register memory
+  * RAM64.hdl - 64-register memory
+  * PC.hdl - 16-bit program counter
+b - folder
+  * RAM512.hdl - 512-register memory
+  * RAM4K.hdl - 4096-register memory
+  * RAM16K.hdl - 16384-register memory
+
+Remarks
+-------
+* DFF is given to us as a primitive data flip flop to use for timing.
+* pc is implemented with the help of a truth table shown in the file.
+* RAMS are implemented recursively meaning that RAM8 is the basic RAM which
+  Used 8 registers and all above rams us 8 of those, excluding RAM16K which 
+  Uses only 4 RAM4K.
+* registers use Bit which is a 1 bit register.

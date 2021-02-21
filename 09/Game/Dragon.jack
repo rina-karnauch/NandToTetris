@@ -1,0 +1,489 @@
+// File name: projects/09/Game/Dragon.jack
+
+/** class to represent a dragon */
+class Dragon{
+    field Array d; // array of point of dragon
+
+    /** Constructs a new Dragon object. */
+    constructor Dragon new() {
+        let d = Array.new(368);
+        let d[0] = Point.new(4,0);
+        let d[1] = Point.new(3,1);
+        let d[2] = Point.new(4,1);
+        let d[3] = Point.new(6,1);
+        let d[4] = Point.new(7,1);
+        let d[5] = Point.new(2,2);
+        let d[6] = Point.new(3,2);
+        let d[7] = Point.new(4,2);
+        let d[8] = Point.new(5,2);
+        let d[9] = Point.new(6,2);
+        let d[10] = Point.new(7,2);
+        let d[11] = Point.new(1,3);
+        let d[12] = Point.new(2,3);
+        let d[13] = Point.new(3,3);
+        let d[14] = Point.new(4,3);
+        let d[15] = Point.new(5,3);
+        let d[16] = Point.new(6,3);
+        let d[17] = Point.new(7,3);
+        let d[18] = Point.new(8,3);
+        let d[19] = Point.new(1,4);
+        let d[20] = Point.new(2,4);
+        let d[21] = Point.new(3,4);
+        let d[22] = Point.new(4,4);
+        let d[23] = Point.new(5,4);
+        let d[24] = Point.new(6,4);
+        let d[25] = Point.new(7,4);
+        let d[26] = Point.new(8,4);
+        let d[27] = Point.new(1,5);
+        let d[28] = Point.new(2,5);
+        let d[29] = Point.new(3,5);
+        let d[30] = Point.new(4,5);
+        let d[31] = Point.new(5,5);
+        let d[32] = Point.new(6,5);
+        let d[33] = Point.new(7,5);
+        let d[34] = Point.new(8,5);
+        let d[35] = Point.new(9,5);
+        let d[36] = Point.new(1,6);
+        let d[37] = Point.new(2,6);
+        let d[38] = Point.new(3,6);
+        let d[39] = Point.new(4,6);
+        let d[40] = Point.new(5,6);
+        let d[41] = Point.new(6,6);
+        let d[42] = Point.new(7,6);
+        let d[43] = Point.new(8,6);
+        let d[44] = Point.new(9,6);
+        let d[45] = Point.new(12,6);
+        let d[46] = Point.new(13,6);
+        let d[47] = Point.new(15,6);
+        let d[48] = Point.new(16,6);
+        let d[49] = Point.new(1,7);
+        let d[50] = Point.new(2,7);
+        let d[51] = Point.new(3,7);
+        let d[52] = Point.new(4,7);
+        let d[53] = Point.new(5,7);
+        let d[54] = Point.new(6,7);
+        let d[55] = Point.new(7,7);
+        let d[56] = Point.new(8,7);
+        let d[57] = Point.new(9,7);
+        let d[58] = Point.new(12,7);
+        let d[59] = Point.new(13,7);
+        let d[60] = Point.new(14,7);
+        let d[61] = Point.new(15,7);
+        let d[62] = Point.new(16,7);
+        let d[63] = Point.new(17,7);
+        let d[64] = Point.new(18,7);
+        let d[65] = Point.new(1,8);
+        let d[66] = Point.new(2,8);
+        let d[67] = Point.new(3,8);
+        let d[68] = Point.new(4,8);
+        let d[69] = Point.new(5,8);
+        let d[70] = Point.new(6,8);
+        let d[71] = Point.new(7,8);
+        let d[72] = Point.new(8,8);
+        let d[73] = Point.new(9,8);
+        let d[74] = Point.new(13,8);
+        let d[75] = Point.new(14,8);
+        let d[76] = Point.new(15,8);
+        let d[77] = Point.new(16,8);
+        let d[78] = Point.new(17,8);
+        let d[79] = Point.new(18,8);
+        let d[80] = Point.new(19,8);
+        let d[81] = Point.new(0,9);
+        let d[82] = Point.new(1,9);
+        let d[83] = Point.new(2,9);
+        let d[84] = Point.new(3,9);
+        let d[85] = Point.new(4,9);
+        let d[86] = Point.new(7,9);
+        let d[87] = Point.new(8,9);
+        let d[88] = Point.new(12,9);
+        let d[89] = Point.new(13,9);
+        let d[90] = Point.new(14,9);
+        let d[91] = Point.new(15,9);
+        let d[92] = Point.new(16,9);
+        let d[93] = Point.new(17,9);
+        let d[94] = Point.new(18,9);
+        let d[95] = Point.new(19,9);
+        let d[96] = Point.new(20,9);
+        let d[97] = Point.new(21,9);
+        let d[98] = Point.new(0,10);
+        let d[99] = Point.new(1,10);
+        let d[100] = Point.new(2,10);
+        let d[101] = Point.new(3,10);
+        let d[102] = Point.new(7,10);
+        let d[103] = Point.new(8,10);
+        let d[104] = Point.new(9,10);
+        let d[105] = Point.new(12,10);
+        let d[106] = Point.new(13,10);
+        let d[107] = Point.new(14,10);
+        let d[108] = Point.new(15,10);
+        let d[109] = Point.new(16,10);
+        let d[110] = Point.new(17,10);
+        let d[111] = Point.new(18,10);
+        let d[112] = Point.new(19,10);
+        let d[113] = Point.new(20,10);
+        let d[114] = Point.new(21,10);
+        let d[115] = Point.new(22,10);
+        let d[116] = Point.new(1,11);
+        let d[117] = Point.new(2,11);
+        let d[118] = Point.new(7,11);
+        let d[119] = Point.new(8,11);
+        let d[120] = Point.new(9,11);
+        let d[121] = Point.new(10,11);
+        let d[122] = Point.new(11,11);
+        let d[123] = Point.new(12,11);
+        let d[124] = Point.new(13,11);
+        let d[125] = Point.new(14,11);
+        let d[126] = Point.new(15,11);
+        let d[127] = Point.new(16,11);
+        let d[128] = Point.new(17,11);
+        let d[129] = Point.new(18,11);
+        let d[130] = Point.new(19,11);
+        let d[131] = Point.new(20,11);
+        let d[132] = Point.new(21,11);
+        let d[133] = Point.new(22,11);
+        let d[134] = Point.new(23,11);
+        let d[135] = Point.new(6,12);
+        let d[136] = Point.new(8,12);
+        let d[137] = Point.new(9,12);
+        let d[138] = Point.new(10,12);
+        let d[139] = Point.new(11,12);
+        let d[140] = Point.new(12,12);
+        let d[141] = Point.new(13,12);
+        let d[142] = Point.new(14,12);
+        let d[143] = Point.new(15,12);
+        let d[144] = Point.new(16,12);
+        let d[145] = Point.new(17,12);
+        let d[146] = Point.new(18,12);
+        let d[147] = Point.new(19,12);
+        let d[148] = Point.new(20,12);
+        let d[149] = Point.new(21,12);
+        let d[150] = Point.new(22,12);
+        let d[151] = Point.new(23,12);
+        let d[152] = Point.new(24,12);
+        let d[153] = Point.new(7,13);
+        let d[154] = Point.new(8,13);
+        let d[155] = Point.new(9,13);
+        let d[156] = Point.new(10,13);
+        let d[157] = Point.new(11,13);
+        let d[158] = Point.new(12,13);
+        let d[159] = Point.new(13,13);
+        let d[160] = Point.new(14,13);
+        let d[161] = Point.new(15,13);
+        let d[162] = Point.new(16,13);
+        let d[163] = Point.new(17,13);
+        let d[164] = Point.new(18,13);
+        let d[165] = Point.new(19,13);
+        let d[166] = Point.new(20,13);
+        let d[167] = Point.new(21,13);
+        let d[168] = Point.new(22,13);
+        let d[169] = Point.new(23,13);
+        let d[170] = Point.new(24,13);
+        let d[171] = Point.new(25,13);
+        let d[172] = Point.new(30,13);
+        let d[173] = Point.new(31,13);
+        let d[174] = Point.new(5,14);
+        let d[175] = Point.new(8,14);
+        let d[176] = Point.new(9,14);
+        let d[177] = Point.new(10,14);
+        let d[178] = Point.new(11,14);
+        let d[179] = Point.new(12,14);
+        let d[180] = Point.new(13,14);
+        let d[181] = Point.new(14,14);
+        let d[182] = Point.new(15,14);
+        let d[183] = Point.new(16,14);
+        let d[184] = Point.new(17,14);
+        let d[185] = Point.new(18,14);
+        let d[186] = Point.new(19,14);
+        let d[187] = Point.new(20,14);
+        let d[188] = Point.new(21,14);
+        let d[189] = Point.new(22,14);
+        let d[190] = Point.new(23,14);
+        let d[191] = Point.new(25,14);
+        let d[192] = Point.new(30,14);
+        let d[193] = Point.new(31,14);
+        let d[194] = Point.new(5,15);
+        let d[195] = Point.new(8,15);
+        let d[196] = Point.new(9,15);
+        let d[197] = Point.new(12,15);
+        let d[198] = Point.new(13,15);
+        let d[199] = Point.new(14,15);
+        let d[200] = Point.new(15,15);
+        let d[201] = Point.new(16,15);
+        let d[202] = Point.new(17,15);
+        let d[203] = Point.new(18,15);
+        let d[204] = Point.new(19,15);
+        let d[205] = Point.new(20,15);
+        let d[206] = Point.new(21,15);
+        let d[207] = Point.new(23,15);
+        let d[208] = Point.new(29,15);
+        let d[209] = Point.new(30,15);
+        let d[210] = Point.new(5,16);
+        let d[211] = Point.new(8,16);
+        let d[212] = Point.new(13,16);
+        let d[213] = Point.new(14,16);
+        let d[214] = Point.new(15,16);
+        let d[215] = Point.new(16,16);
+        let d[216] = Point.new(17,16);
+        let d[217] = Point.new(18,16);
+        let d[218] = Point.new(19,16);
+        let d[219] = Point.new(20,16);
+        let d[220] = Point.new(26,16);
+        let d[221] = Point.new(27,16);
+        let d[222] = Point.new(28,16);
+        let d[223] = Point.new(29,16);
+        let d[224] = Point.new(5,17);
+        let d[225] = Point.new(8,17);
+        let d[226] = Point.new(9,17);
+        let d[227] = Point.new(13,17);
+        let d[228] = Point.new(15,17);
+        let d[229] = Point.new(19,17);
+        let d[230] = Point.new(20,17);
+        let d[231] = Point.new(24,17);
+        let d[232] = Point.new(25,17);
+        let d[233] = Point.new(26,17);
+        let d[234] = Point.new(27,17);
+        let d[235] = Point.new(28,17);
+        let d[236] = Point.new(5,18);
+        let d[237] = Point.new(8,18);
+        let d[238] = Point.new(9,18);
+        let d[239] = Point.new(10,18);
+        let d[240] = Point.new(11,18);
+        let d[241] = Point.new(20,18);
+        let d[242] = Point.new(21,18);
+        let d[243] = Point.new(22,18);
+        let d[244] = Point.new(23,18);
+        let d[245] = Point.new(24,18);
+        let d[246] = Point.new(25,18);
+        let d[247] = Point.new(26,18);
+        let d[248] = Point.new(6,19);
+        let d[249] = Point.new(8,19);
+        let d[250] = Point.new(9,19);
+        let d[251] = Point.new(10,19);
+        let d[252] = Point.new(11,19);
+        let d[253] = Point.new(12,19);
+        let d[254] = Point.new(13,19);
+        let d[255] = Point.new(14,19);
+        let d[256] = Point.new(15,19);
+        let d[257] = Point.new(16,19);
+        let d[258] = Point.new(17,19);
+        let d[259] = Point.new(18,19);
+        let d[260] = Point.new(19,19);
+        let d[261] = Point.new(20,19);
+        let d[262] = Point.new(21,19);
+        let d[263] = Point.new(22,19);
+        let d[264] = Point.new(24,19);
+        let d[265] = Point.new(25,19);
+        let d[266] = Point.new(6,20);
+        let d[267] = Point.new(8,20);
+        let d[268] = Point.new(9,20);
+        let d[269] = Point.new(10,20);
+        let d[270] = Point.new(11,20);
+        let d[271] = Point.new(13,20);
+        let d[272] = Point.new(14,20);
+        let d[273] = Point.new(15,20);
+        let d[274] = Point.new(16,20);
+        let d[275] = Point.new(17,20);
+        let d[276] = Point.new(18,20);
+        let d[277] = Point.new(22,20);
+        let d[278] = Point.new(23,20);
+        let d[279] = Point.new(6,21);
+        let d[280] = Point.new(7,21);
+        let d[281] = Point.new(8,21);
+        let d[282] = Point.new(9,21);
+        let d[283] = Point.new(10,21);
+        let d[284] = Point.new(11,21);
+        let d[285] = Point.new(12,21);
+        let d[286] = Point.new(13,21);
+        let d[287] = Point.new(20,21);
+        let d[288] = Point.new(21,21);
+        let d[289] = Point.new(22,21);
+        let d[290] = Point.new(6,22);
+        let d[291] = Point.new(7,22);
+        let d[292] = Point.new(8,22);
+        let d[293] = Point.new(9,22);
+        let d[294] = Point.new(10,22);
+        let d[295] = Point.new(11,22);
+        let d[296] = Point.new(12,22);
+        let d[297] = Point.new(13,22);
+        let d[298] = Point.new(16,22);
+        let d[299] = Point.new(17,22);
+        let d[300] = Point.new(18,22);
+        let d[301] = Point.new(19,22);
+        let d[302] = Point.new(6,23);
+        let d[303] = Point.new(7,23);
+        let d[304] = Point.new(8,23);
+        let d[305] = Point.new(9,23);
+        let d[306] = Point.new(10,23);
+        let d[307] = Point.new(11,23);
+        let d[308] = Point.new(12,23);
+        let d[309] = Point.new(13,23);
+        let d[310] = Point.new(14,23);
+        let d[311] = Point.new(15,23);
+        let d[312] = Point.new(5,24);
+        let d[313] = Point.new(6,24);
+        let d[314] = Point.new(7,24);
+        let d[315] = Point.new(8,24);
+        let d[316] = Point.new(9,24);
+        let d[317] = Point.new(10,24);
+        let d[318] = Point.new(11,24);
+        let d[319] = Point.new(12,24);
+        let d[320] = Point.new(13,24);
+        let d[321] = Point.new(14,24);
+        let d[322] = Point.new(6,25);
+        let d[323] = Point.new(7,25);
+        let d[324] = Point.new(8,25);
+        let d[325] = Point.new(9,25);
+        let d[326] = Point.new(10,25);
+        let d[327] = Point.new(11,25);
+        let d[328] = Point.new(12,25);
+        let d[329] = Point.new(13,25);
+        let d[330] = Point.new(14,25);
+        let d[331] = Point.new(7,26);
+        let d[332] = Point.new(8,26);
+        let d[333] = Point.new(12,26);
+        let d[334] = Point.new(13,26);
+        let d[335] = Point.new(14,26);
+        let d[336] = Point.new(15,26);
+        let d[337] = Point.new(7,27);
+        let d[338] = Point.new(8,27);
+        let d[339] = Point.new(9,27);
+        let d[340] = Point.new(10,27);
+        let d[341] = Point.new(15,27);
+        let d[342] = Point.new(16,27);
+        let d[343] = Point.new(7,28);
+        let d[344] = Point.new(8,28);
+        let d[345] = Point.new(9,28);
+        let d[346] = Point.new(10,28);
+        let d[347] = Point.new(15,28);
+        let d[348] = Point.new(16,28);
+        let d[349] = Point.new(17,28);
+        let d[350] = Point.new(7,29);
+        let d[351] = Point.new(8,29);
+        let d[352] = Point.new(14,29);
+        let d[353] = Point.new(15,29);
+        let d[354] = Point.new(16,29);
+        let d[355] = Point.new(17,29);
+        let d[356] = Point.new(18,29);
+        let d[357] = Point.new(6,30);
+        let d[358] = Point.new(7,30);
+        let d[359] = Point.new(8,30);
+        let d[360] = Point.new(13,30);
+        let d[361] = Point.new(14,30);
+        let d[362] = Point.new(15,30);
+        let d[363] = Point.new(16,30);
+        let d[364] = Point.new(5,31);
+        let d[365] = Point.new(6,31);
+        let d[366] = Point.new(12,31);
+        let d[367] = Point.new(13,31);
+        return this;
+    }
+
+    /**
+    method to display dragon
+    */
+    method void displayDragon(){
+        var int i;
+        var Point current;
+
+        let i = 0;
+        while (i < 368){
+            let current = d[i];
+            do current.display();
+            let i = i + 1;
+        }
+
+        return;
+    }
+
+    /**
+    method to get dragon indexes
+    */
+    method Array getPixels(){
+        return d;
+    }
+
+    /**
+    method to get dragon array length
+    */
+    method int length(){
+        return 289;
+    }
+
+    /**
+    method to check if dragon passed screen bounds
+    */
+    method boolean checkScreen(){
+        var Point dBit;
+        var int checkY;
+        var int checkX;
+        var int i;
+        
+        let i = 0;
+        while (i<368){
+            let dBit = d[i];
+
+            let checkY = dBit.getY();
+            let checkX = dBit.getX();
+
+            if (checkX > 492){
+                return true;
+            }
+            if (checkX < 20){
+                return true;
+            }
+            if (checkY > 226){
+                return true;
+            }
+            if (checkY < 20){
+                return true;
+            }
+            let  i = i + 1;
+        }
+        return false;
+    }
+
+    /**
+    method to undraw dragon from screen
+    */
+    method void undrawDragon(){
+        do Screen.setColor(false);
+        do displayDragon();
+        return;
+    }
+
+    /**
+    method to move dragon by xa and ya
+    */
+    method void moveDragon(int xa, int ya){
+        var int i;
+        var Point current;
+
+        let i = 0;
+
+        do undrawDragon();
+        do Screen.setColor(true);
+
+        while (i < 368){
+            let current = d[i];
+            do current.move(xa,ya);
+            let d[i] = current;
+            let i = i + 1;
+        }
+        return;
+    }
+
+    /**
+    method to delete dragon
+    */
+    method void deleteDragon(){
+        var int i;
+        let i=0;
+        while(i<368){
+            do Memory.deAlloc(d[i]);
+            let i=i+1;
+        }
+        do Memory.deAlloc(d);
+        do Screen.clearScreen();
+        return;
+    }
+}
